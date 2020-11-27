@@ -20,6 +20,7 @@ export default function Menu() {
     const [screen, setScreen] = useState(0)
 
     const logoff = () => {
+        console.log(sessionStorage.getItem("uuid"))
         sessionStorage.removeItem("uuid")
         Firebase
             .auth()
