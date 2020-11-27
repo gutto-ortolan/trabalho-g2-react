@@ -1,6 +1,14 @@
 import React, { useState, useLayoutEffect } from "react";
 
-import { Button, Grid, Paper, TextField, Checkbox } from "@material-ui/core";
+import {
+  Button,
+  TextField,
+  Checkbox,
+  Container,
+  Typography,
+  withStyles,
+  Link,
+} from "@material-ui/core";
 
 import Firebase from "../services/FirebaseConnect";
 import { useHistory } from "react-router-dom";
@@ -34,6 +42,16 @@ function Cadastrar() {
         });
     }
   };
+
+  const ColorButton = withStyles((theme) => ({
+    root: {
+      color: "#fff",
+      backgroundColor: "#ffb816" /*green[500]*/,
+      "&:hover": {
+        backgroundColor: "#ffb816" /*green[700]*/,
+      },
+    },
+  }))(Button);
 
   const createUser = () => {
     let objeto = {
@@ -82,7 +100,64 @@ function Cadastrar() {
   };
 
   return (
-    <section className="login">
+    <div>
+      <Container component="main" maxWidth="xs">
+        <div className="mt-3 mt-md-5">
+          <div className="text-center">
+            <img src="logo.png" />
+          </div>
+
+          <div className="mt-4">
+            <TextField
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              label="E-mail"
+              size="small"
+              type="email"
+              autoFocus
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              label="Senha"
+              size="small"
+              type="password"
+              autoFocus
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Checkbox
+              color="default"
+              /*checked={lembreme}*/
+              /*onChange={(e) => setLembreme(e.target.checked)}*/
+              inputProps={{ "aria-label": "primary checkbox" }}
+            />
+            Lembre-me
+            <p fullWidth className="text-center mt-2 mensagemErro">
+              {msg}
+            </p>
+            <ColorButton
+              fullWidth
+              type="button"
+              onClick={signUp}
+              variant="contained"
+              color="primary"
+              size="large"
+              className="mb-3 mb-md-4 mt-4"
+            >
+              Cadastrar
+            </ColorButton>
+          </div>
+        </div>
+      </Container>
+    </div>
+    /*<section className="login">
       <div className="loginContainer">
         <label>Nome</label>
         <TextField
@@ -111,7 +186,6 @@ function Cadastrar() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        {/* <p className="errorMsg">{msgEmail}</p> */}
         <label>Senha</label>
         <TextField
           value={password}
@@ -121,7 +195,6 @@ function Cadastrar() {
           autoFocus
           required
         />
-        {/* <p className="errorMsg">{msgSenha}</p> */}
         <Checkbox
           checked={profissional}
           onChange={checkProfissional}
@@ -138,7 +211,7 @@ function Cadastrar() {
           <button onClick={signUp}>Cadastrar</button>
         </div>
       </div>
-    </section>
+    </section>*/
   );
 }
 
