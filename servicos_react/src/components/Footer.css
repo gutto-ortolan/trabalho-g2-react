@@ -1,0 +1,35 @@
+/* .main-footer {
+    color: white;
+    background-color: #dc3545;
+    padding-top: 3em;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  } */
+
+  .fixarRodape {
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    display: block;
+    position: relative;
+  }
+
+  
+
+  .footer_area {
+    background: rgb(0 8 37);
+}
+
+.p_120 {
+    padding-top: 50px;
+    padding-bottom: 50px; 
+}
+
+.row {
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px
+}

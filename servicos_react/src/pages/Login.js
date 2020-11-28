@@ -5,9 +5,7 @@ import {
   TextField,
   Checkbox,
   Container,
-  Typography,
   withStyles,
-  Link,
 } from "@material-ui/core";
 
 import Firebase from "../services/FirebaseConnect";
@@ -18,8 +16,6 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
-  const [msgEmail, setMsgEmail] = useState("");
-  const [msgSenha, setMsgSenha] = useState("");
   const [lembreme, setLembreme] = useState(false);
 
   useLayoutEffect(() => {
@@ -62,9 +58,9 @@ function Login() {
   const ColorButton = withStyles((theme) => ({
     root: {
       color: "#fff",
-      backgroundColor: "#ffb816" /*green[500]*/,
+      backgroundColor: "#ffb816",
       "&:hover": {
-        backgroundColor: "#ffb816" /*green[700]*/,
+        backgroundColor: "#ffb816" ,
       },
     },
   }))(Button);
@@ -72,9 +68,9 @@ function Login() {
   const ColorButtonCadastar = withStyles((theme) => ({
     root: {
       color: "#fff",
-      backgroundColor: "#000000" /*green[500]*/,
+      backgroundColor: "#000000",
       "&:hover": {
-        backgroundColor: "#000000" /*green[700]*/,
+        backgroundColor: "#000000",
       },
     },
   }))(Button);
@@ -84,7 +80,7 @@ function Login() {
       <Container component="main" maxWidth="xs">
         <div className="mt-3 mt-md-5">
           <div className="text-center">
-            <img src="logo.png" />
+            <img src="logo.png"  className="img-fluid" alt="Responsive image"/>
           </div>
 
           <div className="mt-4">
@@ -107,7 +103,6 @@ function Login() {
               label="Senha"
               size="small"
               type="password"
-              autoFocus
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -119,7 +114,7 @@ function Login() {
               inputProps={{ "aria-label": "primary checkbox" }}
             />
             Lembre-me
-            <p fullWidth className="text-center mt-2 mensagemErro">
+            <p className="text-center mt-2 mensagemErro">
               {msg}
             </p>
             <ColorButton

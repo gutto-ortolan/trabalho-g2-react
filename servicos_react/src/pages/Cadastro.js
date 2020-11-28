@@ -5,14 +5,11 @@ import {
   TextField,
   Checkbox,
   Container,
-  Typography,
   withStyles,
-  Link,
 } from "@material-ui/core";
 
 import Firebase from "../services/FirebaseConnect";
 import { useHistory } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 
 function Cadastrar() {
   let history = useHistory();
@@ -43,6 +40,10 @@ function Cadastrar() {
     }
   };
 
+  const logar = () => {
+    history.push("/");
+  };
+
   const ColorButton = withStyles((theme) => ({
     root: {
       color: "#fff",
@@ -55,16 +56,16 @@ function Cadastrar() {
 
   const createUser = () => {
     let objeto = {
-      usuario: sessionStorage.getItem("uuid"),
+      email: email,
       nome: nome,
-      sobrenome: nome,
-      profissional: profissional ? profissional : cliente,
+      sobrenome: sobrenome,
+      profissional: profissional ? true : false,
     };
 
-    let code = uuidv4();
+    let code = sessionStorage.getItem("uuid");
 
     Firebase.database()
-      .ref(`planta/${code}`)
+      .ref(`usuario/${code}`)
       .set(objeto)
       .then(() => {
         console.log("Cadastro de usuario feito com sucesso.");
@@ -72,7 +73,6 @@ function Cadastrar() {
       .catch((erro) => {
         console.log(erro);
       });
-    
   };
 
   const checkProfissional = () => {
@@ -104,7 +104,7 @@ function Cadastrar() {
       <Container component="main" maxWidth="xs">
         <div className="mt-3 mt-md-5">
           <div className="text-center">
-            <img src="logo.png" />
+          <img src="logo.png"  className="img-fluid" alt="Responsive image"/>
           </div>
 
           <div className="mt-4">
@@ -112,10 +112,32 @@ function Cadastrar() {
               variant="outlined"
               margin="normal"
               fullWidth
+              label="Nome"
+              size="small"
+              type="text"
+              autoFocus
+              required
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              label="Sobrenome"
+              size="small"
+              type="text"
+              required
+              value={sobrenome}
+              onChange={(e) => setSobrenome(e.target.value)}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              fullWidth
               label="E-mail"
               size="small"
               type="email"
-              autoFocus
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -127,19 +149,28 @@ function Cadastrar() {
               label="Senha"
               size="small"
               type="password"
-              autoFocus
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Checkbox
-              color="default"
-              /*checked={lembreme}*/
-              /*onChange={(e) => setLembreme(e.target.checked)}*/
-              inputProps={{ "aria-label": "primary checkbox" }}
-            />
-            Lembre-me
-            <p fullWidth className="text-center mt-2 mensagemErro">
+            <div className="text-left">
+              <Checkbox
+                color="default"
+                checked={profissional}
+                onChange={checkProfissional}
+                inputProps={{ "aria-label": "primary checkbox" }}
+              />
+              Profissional
+              <br></br>
+              <Checkbox
+                color="default"
+                checked={cliente}
+                onChange={checkCliente}
+                inputProps={{ "aria-label": "primary checkbox" }}
+              />
+              Cliente
+            </div>
+            <p className="text-center mt-2 mensagemErro">
               {msg}
             </p>
             <ColorButton
@@ -149,69 +180,24 @@ function Cadastrar() {
               variant="contained"
               color="primary"
               size="large"
-              className="mb-3 mb-md-4 mt-4"
+              className="mb-3 mb-md-2 mt-4"
             >
               Cadastrar
             </ColorButton>
+            <Button
+              className="text-center"
+              onClick={logar}
+              fullWidth
+              style={{ backgroundColor: "transparent", borderColor: "transparent" }}
+            >
+              <p className="text-center mt-2 mensagemLogin">
+                <b>Já é cadastrado? Faça o login.</b>
+              </p>
+            </Button>
           </div>
         </div>
       </Container>
     </div>
-    /*<section className="login">
-      <div className="loginContainer">
-        <label>Nome</label>
-        <TextField
-          size="small"
-          type="text"
-          autoFocus
-          required
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-        />
-        <label>Sobrenome</label>
-        <TextField
-          size="small"
-          type="text"
-          autoFocus
-          required
-          value={sobrenome}
-          onChange={(e) => setSobrenome(e.target.value)}
-        />
-        <label>E-mail</label>
-        <TextField
-          size="small"
-          type="email"
-          autoFocus
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label>Senha</label>
-        <TextField
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          size="small"
-          autoFocus
-          required
-        />
-        <Checkbox
-          checked={profissional}
-          onChange={checkProfissional}
-          inputProps={{ "aria-label": "primary checkbox" }}
-        />{" "}
-        <span className="lembre">Profissional</span>
-        <Checkbox
-          checked={cliente}
-          onChange={checkCliente}
-          inputProps={{ "aria-label": "primary checkbox" }}
-        />{" "}
-        <span className="lembre">Cliente</span>
-        <div className="btnContainer">
-          <button onClick={signUp}>Cadastrar</button>
-        </div>
-      </div>
-    </section>*/
   );
 }
 
