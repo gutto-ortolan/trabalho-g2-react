@@ -6,6 +6,7 @@ import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+
 function Header() {
 
   const Nav = styled.nav`
@@ -128,6 +129,8 @@ function Header() {
       });
   };
 
+  
+
   return (
     <>
     {selecionaUsuario()}
@@ -141,7 +144,7 @@ function Header() {
             {isProfissional ? "Meus Serviços" : "Serviços Contratados"}
           </NavLink>
           <NavLink to={isProfissional ? "/servicos-contratados-profissional" : "/pesquisar-profissional"} activeStyle>
-          {isProfissional ? "Serviços Contratados" : "Pesquisar Profissional"}
+            {isProfissional ? "Serviços Contratados" : "Pesquisar Profissional"}
           </NavLink>
           <NavLink to="/perfil" activeStyle>
             Perfil

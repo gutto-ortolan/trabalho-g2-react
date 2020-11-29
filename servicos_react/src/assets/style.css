@@ -10,5 +10,10 @@
   color: white;
 }
 
-	
+.align-center {
+  text-align: center;
+}	
 
+.fixRodape{
+  height: 100vh;
+}
