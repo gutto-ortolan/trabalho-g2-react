@@ -10,6 +10,7 @@ import PesquisarProfissional from './pages/cliente/PesquisarProfissional'
 import ServicosContratadosCliente from './pages/cliente/ServicosContratadosCliente'
 
 
+
 export default function App() {
 
   const PrivateRoute = ({ component: Component}) => {
